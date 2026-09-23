@@ -45,8 +45,8 @@
       button.onkeydown=e=>{let next;if(e.key==='ArrowRight')next=(i+1)%tabs.length;else if(e.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=tabs.length-1;else return;e.preventDefault();tabs[next].focus();selectMarket(tabs[next].dataset.market,true);};
     });
     selectMarket(new URL(location.href).searchParams.get('market'));
-    section.querySelector('.pm-data-status').textContent='SIMULATION · Not live';
-    section.querySelector('#pm-index-panel > p').textContent='Practice with virtual credits. This simulator is separate from your real mainnet wallet and the future PUSHIN token.';
+    section.querySelector('.pm-data-status').remove();
+    section.querySelector('#pm-index-panel > p').remove();
     refreshSimulation=window.PushinSimulator.mount(section.querySelector('#pm-index-panel'),()=>selectedMarket);
     window.addEventListener('popstate',()=>selectMarket(new URL(location.href).searchParams.get('market')));
   }
