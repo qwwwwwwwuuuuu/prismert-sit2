@@ -220,3 +220,5 @@ body.pushin-paper-app:has(.pa-terminal){background:#fff7f2}
 @media(max-width:999px){.pa-terminal .pa-market-summary{flex-wrap:wrap}.pa-header{flex-wrap:wrap}.pa-nav{order:3;width:100%}.pa-terminal{grid-template-columns:minmax(0,1fr) 300px}.pa-terminal .pa-book{display:none}.pa-terminal .pa-ticket{grid-column:2}.pa-statusbar{flex-wrap:wrap}}
 @media(max-width:780px){.pa-terminal{display:block}.pa-terminal .pa-book{display:block}.pa-terminal .pa-chart{height:330px}.pa-header-actions{flex-wrap:wrap}.pa-search{display:none}.pa-terminal .pa-market-stats{width:100%}.pa-main:has(.pa-terminal){padding-bottom:64px}.pa-statusbar{position:static}.pa-terminal .pa-ticket{overflow:visible}}
 
+
+.pa-terminal .pa-book{overflow:auto}.pa-terminal .pa-book-table td{padding-top:3px;padding-bottom:3px}

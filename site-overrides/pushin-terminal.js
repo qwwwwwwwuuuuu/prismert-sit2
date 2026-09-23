@@ -197,7 +197,7 @@
     if(chartMode==='line')parts.push('<polyline fill="none" stroke="#df6f96" stroke-width="2" points="'+bars.map(function(b,i){return(14+i*11.2)+','+y(b.c);}).join(' ')+'"/>');
     else bars.forEach(function(b,i){var x=14+i*11.2,color=b.c>=b.o?'#35ad82':'#df6680';parts.push('<g><title>'+new Date(b.t).toISOString()+' O '+b.o.toFixed(3)+' H '+b.h.toFixed(3)+' L '+b.l.toFixed(3)+' C '+b.c.toFixed(3)+'</title><line x1="'+x+'" x2="'+x+'" y1="'+y(b.h)+'" y2="'+y(b.l)+'" stroke="'+color+'"/><rect x="'+(x-3)+'" y="'+Math.min(y(b.o),y(b.c))+'" width="6" height="'+Math.max(1,Math.abs(y(b.o)-y(b.c)))+'" fill="'+color+'"/></g>');});
     bars.forEach(function(b,i){if(i%16===0)parts.push('<text x="'+(14+i*11.2)+'" y="332" fill="#9a7768" font-size="12">'+new Date(b.t).toISOString().slice(step>=86400000?5:11,step>=86400000?10:16)+'</text>');});
-    return '<svg viewBox="0 0 990 350" role="img" aria-label="'+market.short+' simulated '+chartMode+' chart"><text x="12" y="18" fill="#9a7768" font-size="12">O '+lastBar.o.toFixed(3)+' H '+lastBar.h.toFixed(3)+' L '+lastBar.l.toFixed(3)+' C '+lastBar.c.toFixed(3)+'</text>'+parts.join('')+'<line x1="8" x2="910" y1="'+y(lastBar.c)+'" y2="'+y(lastBar.c)+'" stroke="#9a7768" stroke-dasharray="3 4"/><text x="930" y="340" fill="#9a7768" font-size="10">UTC</text></svg>';
+    return '<svg viewBox="0 0 990 350" preserveAspectRatio="none" role="img" aria-label="'+market.short+' simulated '+chartMode+' chart"><text x="12" y="18" fill="#9a7768" font-size="12">O '+lastBar.o.toFixed(3)+' H '+lastBar.h.toFixed(3)+' L '+lastBar.l.toFixed(3)+' C '+lastBar.c.toFixed(3)+'</text>'+parts.join('')+'<line x1="8" x2="910" y1="'+y(lastBar.c)+'" y2="'+y(lastBar.c)+'" stroke="#9a7768" stroke-dasharray="3 4"/><text x="930" y="340" fill="#9a7768" font-size="10">UTC</text></svg>';
   }
   function bookHtml(market) {
     if(bookMode==='trades'){return '<table class="pa-book-table"><thead><tr><th>Price</th><th>Size</th><th>Time</th></tr></thead><tbody>'+Array.from({length:18},function(_,i){return '<tr><td class="'+(i%2?'pa-up':'pa-down')+'">'+fmt(priceOf(market,Date.now()-i*5000),2)+'</td><td>'+compact(1000+seeded(i)*40000)+'</td><td>'+new Date(Date.now()-i*5000).toISOString().slice(11,19)+'</td></tr>';}).join('')+'</tbody></table>';}
@@ -206,7 +206,7 @@
     var asks = [], bids = [];
     for (var i = 7; i >= 1; i -= 1) asks.push({ p: price + step * i, s: 18000 + seeded(i + Math.floor(Date.now() / 8000)) * 90000 });
     for (var j = 1; j <= 7; j += 1) bids.push({ p: price - step * j, s: 21000 + seeded(j * 3 + Math.floor(Date.now() / 9000)) * 87000 });
-    function rows(items, tone) { return items.map(function (x) { return '<tr><td class="' + tone + '">' + fmt(x.p, market.decimals) + '</td><td>$' + compact(x.s) + '</td><td>$' + compact(x.s * (1 + seeded(x.s) * 4)) + '</td></tr>'; }).join(""); }
+    function rows(items, tone) { var sum=0; return items.map(function (x) { sum+=x.s; return '<tr><td class="' + tone + '">' + fmt(x.p, market.decimals) + '</td><td>$' + compact(x.s) + '</td><td>$' + compact(sum) + '</td></tr>'; }).join(""); }
     return '<table class="pa-book-table"><thead><tr><th>Price</th><th>Size</th><th>Total</th></tr></thead><tbody>' + rows(asks, "pa-down") + '</tbody></table><div class="pa-book-mid"><span>' + fmt(price, market.decimals) + '</span><small>Index · fills here</small></div><table class="pa-book-table"><tbody>' + rows(bids, "pa-up") + '</tbody></table>';
   }
 
@@ -258,7 +258,7 @@
 
   function refreshTrade(full) {
     if(!document.getElementById('pa-terminal'))return;
-    if (full !== false) document.getElementById("pa-market-head").innerHTML = tradeHeadHtml();
+    document.getElementById("pa-market-head").innerHTML = tradeHeadHtml();
     refreshTicker(); refreshChart(); refreshBook(); refreshTicket(); refreshDesk(); updateClock();
   }
   function refreshChart() { var node = document.getElementById("pa-chart"); if (node) node.innerHTML = chartHtml(currentMarket); }
@@ -266,7 +266,7 @@
   function refreshTicket(preserve) {
     var node = document.getElementById("pa-ticket");
     if (!node) return;
-    if(node.contains(document.activeElement)&&!preserve)return;
+    if(node.contains(document.activeElement)&&document.activeElement.matches('input')&&!preserve)return;
     var oldLimit=document.getElementById('pa-limit')?.value;
     var focusId=node.contains(document.activeElement)?document.activeElement.id:null;
     var margin = preserve && document.getElementById("pa-margin") ? document.getElementById("pa-margin").value : null;
