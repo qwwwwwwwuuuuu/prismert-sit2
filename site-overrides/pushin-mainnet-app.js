@@ -1,6 +1,7 @@
 (function(){
   'use strict';
   const path=location.pathname;
+  if(!/^\/connect(?:\.html)?$/.test(path))return;
   if(!/^\/(trade[^/]*|markets|basis|analytics|portfolio|connect)(\.html)?$/.test(path)){
     const notice=()=>{
       const banner=document.createElement('aside');
@@ -85,7 +86,6 @@
     <section class="pa-card pm-account"><h2>Your mainnet wallet</h2><p data-address class="pm-address"></p><p>Native balance <strong data-balance>—</strong></p><p>Balances are read from your selected wallet provider, never from a simulated account.</p><div class="pm-actions"><button class="pa-button" data-switch hidden>Switch to Robinhood Mainnet</button><button class="pa-button" data-refresh>Refresh balance</button><button class="pa-button" data-disconnect hidden>Disconnect locally</button><a data-explorer hidden target="_blank" rel="noopener noreferrer">View address and history in explorer ↗</a></div></section>
     <section class="pa-card pm-account"><h2>Launch status</h2><p>Wallet connection: available · Token contract: not configured · Liquidity: not configured · Trading: unavailable</p><p>No derivatives, leverage, vault deposits or reward contracts are enabled. Connecting a mainnet wallet does not enable these services.</p></section></main></div><dialog class="pm-dialog"><h2>Connect a wallet</h2><p>Select a wallet detected in your browser. No signature or transaction is requested.</p><div data-wallets class="pm-wallets"></div><form method="dialog"><button class="pa-button">Close</button></form></dialog>`;
     root=document.getElementById('pushin-mainnet');dialog=document.querySelector('dialog');
-    mountMarkets();
     wallet=window.PushinWallet.createWallet(update);update(wallet.getState());
     root.querySelector('[data-connect]').onclick=choose;
     root.querySelector('[data-switch]').onclick=()=>wallet.switchNetwork();
