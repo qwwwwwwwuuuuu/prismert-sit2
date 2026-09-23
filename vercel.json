@@ -8,10 +8,6 @@
       "destination": "https://prismperp.trade/api/snapshot"
     },
     {
-      "source": "/api/stream",
-      "destination": "https://prismperp.trade/api/stream"
-    },
-    {
       "source": "/api/candles",
       "destination": "https://prismperp.trade/api/candles"
     },
