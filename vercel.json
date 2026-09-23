@@ -2,31 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/api/snapshot",
-      "destination": "https://prismperp.trade/api/snapshot"
-    },
-    {
-      "source": "/api/candles",
-      "destination": "https://prismperp.trade/api/candles"
-    },
-    {
-      "source": "/api/history",
-      "destination": "https://prismperp.trade/api/history"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/api/:path*",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, s-maxage=5, stale-while-revalidate=15"
-        }
-      ]
-    }
-  ],
   "cleanUrls": false,
   "trailingSlash": false
 }
