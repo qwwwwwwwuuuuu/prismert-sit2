@@ -1,0 +1,7 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');
+require('./dist/pushin-simulator.js');const {create,pnl,price}=global.PushinSimulator;
+test('demo balance reserved and returned without price change',()=>{const a=create(),p=a.open('c-vix-30d',1,100,1000);assert.equal(a.snapshot().cash,9900);a.close(p.key,1000);assert.equal(a.snapshot().cash,10000);assert.equal(a.snapshot().positions.length,0);});
+test('invalid stakes and overdrafts rejected',()=>{const a=create();for(const amount of [-1,0,NaN,Infinity,10001])assert.throws(()=>a.open('c-vix-30d',1,amount));assert.equal(a.snapshot().cash,10000);});
+test('score direction and caps explicit',()=>{const p={id:'fr-basis-btc',stake:100,entry:.5,direction:1};assert.equal(pnl(p,.55).toFixed(2),'50.00');assert.equal(pnl({...p,direction:-1},.55).toFixed(2),'-50.00');assert.equal(pnl(p,-50),-100);assert.equal(pnl(p,50),100);});
+test('reset is isolated to virtual account',()=>{const a=create();a.open('fr-basis-eth',-1,500);a.reset();assert.deepEqual(a.snapshot(),{cash:10000,positions:[]});});
+test('generated series is deterministic and finite',()=>{for(const id of ['c-vix-30d','fr-basis-btc','fr-basis-eth']){assert.equal(price(id,1000),price(id,1000));assert(Number.isFinite(price(id,2000)));}});
