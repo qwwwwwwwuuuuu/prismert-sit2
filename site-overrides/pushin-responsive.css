@@ -110,3 +110,19 @@ header nav[aria-label="Primary"]{gap:clamp(12px,1.4vw,24px)}
  .pusheen-page--home .prism-motion-label{flex:1;min-width:0;white-space:normal;overflow-wrap:break-word;line-height:1.4}
  .pusheen-page--home .prism-motion-dots{justify-content:center;padding:0}
 }
+
+/* Mascots retain a real size at every breakpoint and never join reveal effects. */
+body .pushin-side-cat{display:block!important;opacity:1!important;visibility:visible!important;flex-shrink:0;filter:none!important}
+.pusheen-home .pushin-side-art>.pushin-side-cat{z-index:1;width:clamp(130px,calc((100vw - 1180px)/2),430px)!important}
+.pushin-page-cats>.pushin-side-cat{width:clamp(130px,calc((100vw - 1240px)/2),430px);z-index:1}
+@media(min-width:761px) and (max-width:1500px){
+ .pusheen-home .pushin-side-art{padding-bottom:160px!important}
+ .pusheen-home .pushin-side-art>.pushin-side-cat{width:130px!important;bottom:4px}
+ .pusheen-home .pushin-side-art[data-room-scene]::before{bottom:150px}
+ .pushin-page-cats{position:relative;top:auto;height:150px;margin:0 0 16px}
+ .pushin-page-cats>.pushin-side-cat{width:130px}
+}
+@media(max-width:760px){
+ .pusheen-home .pushin-side-art>.pushin-side-cat{width:100px!important;max-width:38vw!important}
+ .pushin-page-cats>.pushin-side-cat{width:108px;max-width:38vw}
+}
