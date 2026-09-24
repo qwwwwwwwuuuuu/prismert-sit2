@@ -1,0 +1,23 @@
+/* Earnly-inspired motion, tuned to the existing cream/pink Pushin artwork. */
+@media(prefers-reduced-motion:no-preference){
+ html{scroll-behavior:smooth}
+ .pushin-side-cat[data-pushin-floating]{animation:pushin-art-float 9s ease-in-out infinite!important}
+ .pushin-side-cat--right[data-pushin-floating]{animation-delay:-4.5s!important;animation-duration:11s!important}
+ .pushin-flow-hub[data-pushin-floating]{animation:pushin-hub-breathe 6s ease-in-out infinite}
+ [data-pushin-floating="paused"],.pushin-motion-paused [data-pushin-floating]{animation-play-state:paused!important}
+ .pushin-risk-card,.pushin-market-card,.pushin-roadmap-grid article,.pushin-venue-grid li{transition:translate .24s ease,box-shadow .24s ease,border-color .24s ease}
+ .pushin-flow-cta,header .pushin-header-actions>a{position:relative;overflow:hidden;isolation:isolate}
+ .pushin-flow-cta::after,header .pushin-header-actions>a::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 20%,rgba(255,250,246,.55) 50%,transparent 80%);translate:-130% 0}
+ .pushin-flow-cta:is(:hover,:focus-visible)::after,header .pushin-header-actions>a:is(:hover,:focus-visible)::after{animation:pushin-button-sweep .8s ease-out}
+ @media(hover:hover) and (pointer:fine){
+ .pushin-risk-card:hover,.pushin-market-card:hover,.pushin-roadmap-grid article:hover,.pushin-venue-grid li:hover{translate:0 -4px;box-shadow:0 12px 26px -18px #9e6d52;border-color:#d6a4b5}
+ }
+}
+@keyframes pushin-art-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes pushin-hub-breathe{0%,100%{box-shadow:0 0 0 10px #fff6ef,0 0 0 11px #eed9cd}50%{box-shadow:0 0 0 14px #fff6ef,0 0 0 15px #efcbd8}}
+@keyframes pushin-button-sweep{from{translate:-130% 0}to{translate:130% 0}}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ .pushin-side-cat,.pushin-flow-hub,.pushin-flow-link,.pushin-risk-card,.pushin-market-card,.pushin-roadmap-grid article,.pushin-venue-grid li,.meme-card{animation:none!important;transition:none!important;translate:none!important}
+ .pushin-flow-cta::after,header .pushin-header-actions>a::after{animation:none!important}
+}
