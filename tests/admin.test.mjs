@@ -8,6 +8,9 @@ test('admin HTML never served to an unauthenticated visitor',async()=>{
  assert.equal((await call('Basic '+Buffer.from('admin:wrong').toString('base64'))).code,401);
  const good=await call('Basic '+Buffer.from('admin:'+process.env.PUSHIN_ADMIN_SECRET).toString('base64'));
  assert.equal(good.code,200);assert.match(good.body,/contract-form/);
+ process.env.PUSHIN_ADMIN_SECRET='configured-pass';
+ assert.equal((await call('Basic '+Buffer.from('admin:configured-pass').toString('base64'))).code,200);
+ assert.equal((await call('Basic '+Buffer.from('other:configured-pass').toString('base64'))).code,401);
  delete process.env.PUSHIN_ADMIN_SECRET;
  assert.equal((await call('')).code,401);
 });

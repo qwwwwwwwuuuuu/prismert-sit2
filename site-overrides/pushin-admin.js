@@ -2,6 +2,7 @@
   const form = document.getElementById('contract-form'), input = document.getElementById('contract'), status = document.getElementById('status'), current = document.getElementById('current'), button = form.querySelector('button');
   async function request(options) {
     const r = await fetch(options?.method === 'POST' ? '/admin.html' : '/api/contract', {cache:'no-store',signal:AbortSignal.timeout(10000),...options});
+    if (r.status === 401) throw new Error('Нужен повторный вход: логин admin и ваш сохранённый пароль.');
     const data = await r.json();
     if (!r.ok) throw new Error(data.error || 'Не удалось сохранить контракт.');
     return data;
