@@ -1,0 +1,85 @@
+/* Shared layout boundaries: compact phones through wide desktop screens. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:140px}
+body{min-width:280px}
+img,video,canvas{max-width:100%}
+main,main>div,.pa-main,.pm-main,.pa-card,.pa-terminal>*{min-width:0}
+main h1,main h2,main h3{overflow-wrap:break-word}
+button,a,input,select,summary{touch-action:manipulation}
+.pushin-responsive-table{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.pushin-responsive-table:focus-visible{outline:2px solid #b36b86;outline-offset:2px}
+pre{max-width:100%;overflow:auto}
+header .pushin-header-row{align-items:center}
+header nav[aria-label="Primary"]{gap:clamp(12px,1.4vw,24px)}
+.pa-nav,.pushin-preview-tabs,.pushin-timeframes,.pm-market-tabs{max-width:100%;overscroll-behavior-x:contain}
+.pa-market-stats>*{min-width:0;overflow-wrap:anywhere}
+.pusheen-home .pusheen-room-section{width:100%!important;margin-left:0!important}
+/* The full-bleed sections live inside a constrained ancestor. */
+.pusheen-home main>div>div{max-width:none!important;padding-inline:0!important}
+.pusheen-home .prism-hero{max-width:1160px;margin-inline:auto;padding-inline:20px}
+.pusheen-home .pusheen-room-section{padding-inline:max(20px,calc((100% - 1120px)/2))!important}
+@media(max-width:1180px){
+ header .pushin-header-row nav[aria-label="Primary"]{display:none!important}
+ header .pushin-mobile-nav{display:block;position:static;flex-shrink:0;align-self:center;margin:0 0 0 auto;order:2}
+ header .pushin-mobile-nav summary{min-height:44px;display:flex;align-items:center;padding:8px 16px;background:#f7dbe3;border-radius:14px;cursor:pointer;list-style:none}
+ header .pushin-mobile-nav summary::-webkit-details-marker{display:none}
+ header .pushin-mobile-nav nav{position:absolute;inset:100% 12px auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;min-width:0;max-height:65vh;overflow:auto;padding:12px;background:#fffaf6;border:1px solid #d7b19e;border-radius:16px;box-shadow:0 12px 28px #65463420;z-index:100}
+ header .pushin-mobile-nav nav a{display:flex;align-items:center;min-height:44px;padding:10px 12px}
+ header .pushin-header-actions{order:3;margin-left:0}
+ .pa-header{flex-wrap:wrap}.pa-nav{flex-basis:100%;order:3}.pa-search{display:none}
+}
+@media(max-width:600px){
+ header .pushin-header-row{padding:8px 12px;gap:8px}
+ header .pushin-header-actions{width:100%;display:flex;flex-wrap:nowrap;justify-content:space-between;gap:8px}
+ #pushin-ca{flex:1;max-width:calc(100% - 142px);padding:4px 5px 4px 9px;gap:5px}
+ #pushin-ca [data-ca-value]{flex:1;max-width:none;min-width:0}
+ #pushin-ca button{min-height:36px;min-width:44px;flex-shrink:0}
+ header .pushin-header-actions>a{min-height:44px;padding-inline:12px;font-size:12px}
+ .pusheen-home .prism-hero h1{font-size:clamp(29px,8vw,44px)!important;line-height:1.12!important}
+ .pusheen-home .prism-hero p{font-size:14px!important;line-height:1.6!important}
+ .pusheen-home .pusheen-room-section h2{font-size:clamp(24px,6.5vw,32px);line-height:1.2}
+ .pusheen-home .pusheen-room-section{padding-inline:14px!important}
+ .pusheen-home .pushin-risk-head{flex-wrap:wrap;gap:5px}
+ .pushin-risk-head>a{overflow-wrap:anywhere}
+ .pushin-preview-heading{padding:14px;gap:10px}
+ .pushin-live-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-inline:14px}
+ .pushin-preview-tabs button,.pushin-timeframes button{min-height:44px}
+ .pushin-timeframes{overflow-x:auto;flex-wrap:nowrap;padding:6px;gap:0}
+ .pushin-timeframes button{flex:1;padding:8px}
+ #pushin-live-chart{height:clamp(220px,64vw,320px);padding:6px}
+ .pa-header{padding:8px 12px}.pa-header-actions{gap:6px;flex-wrap:wrap;min-width:0}
+ .pa-nav a{min-height:44px;display:flex;align-items:center}
+ .pa-terminal .pa-market-summary{padding:12px;gap:12px}
+ .pa-terminal .pa-market-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pa-terminal .pa-chart{height:clamp(250px,70vw,360px);min-height:250px}
+ .pa-terminal .pa-book{max-height:360px;overflow:auto}
+ .pa-terminal .pa-ticket{padding:16px}
+ .pa-table-wrap,.pushin-table-scroll{max-width:100%;overflow:auto;-webkit-overflow-scrolling:touch}
+ input:not([type="checkbox"]):not([type="radio"]),select,textarea{font-size:16px!important}
+ .pa-btn,.pa-button,.meme-download,.meme-filters button,.pushin-leverage-switch button{min-height:44px}
+ .meme-download{min-width:44px}
+ .meme-caption{flex-wrap:wrap;gap:6px}
+ .meme-caption>div{flex:1;min-width:70px}
+ #meme-dialog{padding:24px 16px;max-height:90vh;max-height:90dvh;overflow:auto}
+ #meme-large{height:min(50vh,320px)}
+ .pm-dialog{width:calc(100% - 24px);max-height:90dvh;overflow:auto;padding:22px}
+ footer li.truncate{white-space:normal;overflow:visible}
+ footer>div{padding-top:28px!important;padding-bottom:28px!important}
+ .pushin-page-cats{height:120px}.pushin-page-cats>.pushin-side-cat{width:108px}
+}
+@media(max-width:359px){
+ .meme-grid{grid-template-columns:1fr}
+ #pushin-ca{max-width:calc(100% - 130px);font-size:11px}
+ header .pushin-header-actions>a{padding-inline:8px}
+ .pushin-venue-grid{gap:8px}
+ .pushin-flow-link{padding:10px;gap:8px;font-size:13px}
+ .pushin-flow-icon{width:34px;height:34px}
+}
+@media(hover:none) and (pointer:coarse){
+ .meme-view{opacity:1}
+ .pushin-flow-link,.pushin-section-nav a,.pushin-doc-link{min-height:44px}
+}
+@media(max-height:500px) and (orientation:landscape){
+ body>header,.pa-header{position:relative!important}
+ header .pushin-mobile-nav nav{max-height:70vh}
+}

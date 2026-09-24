@@ -31,6 +31,9 @@ function patchHtml(dir) {
     // Keep the meme gallery discoverable in desktop, mobile and footer menus.
     html=html.replace(/<a\b([^>]*href="\/roadmap\.html"[^>]*)>Roadmap<\/a>/g, (match,attrs) => match+'<a '+attrs.replace('/roadmap.html','/memes.html')+'>Memes</a>');
 
+    // Archived detail pages contained a second site header inside main.
+    let headerCount=0;
+    html=html.replace(/<header\b[\s\S]*?<\/header>/gi, match => ++headerCount===1 ? match : '');
     // Remove inherited Prism icons, including archive-style filenames and Safari icons.
     html=html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon|apple-touch-icon-precomposed|mask-icon)["'][^>]*>/gi,'');
     html=html.replace('</head>','<link rel="icon" type="image/png" sizes="32x32" href="/brand/pushin-favicon-v1.png?v=2"><link rel="shortcut icon" href="/brand/pushin-favicon-v1.ico?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/brand/pushin-apple-icon-v1.png?v=2"></head>');
@@ -40,7 +43,7 @@ function patchHtml(dir) {
     html=html.replace(/<script[^>]+src="\/pushin-content\.js"[^>]*><\/script>/g,'');
     html=html.replace(/<link[^>]+href="\/pushin-content\.css"[^>]*>/g,'');
     const wallet=entry.name==='connect.html'?'<script src="/pushin-mainnet-wallet.js" defer></script><script src="/pushin-mainnet-app.js" defer></script>':'';
-    html=html.replace('</head>','<link rel="stylesheet" href="/pushin-motion.css?v=4"/><script src="/pushin-motion.js?v=4" defer></script><link rel="stylesheet" href="/pushin-terminal.css"/><link rel="stylesheet" href="/pushin-mainnet.css"/><link rel="stylesheet" href="/pushin-content.css"/>'+wallet+'<script src="/pushin-terminal.js" defer></script><script src="/pushin-content.js" defer></script></head>');
+    html=html.replace('</head>','<link rel="stylesheet" href="/pushin-motion.css?v=4"/><script src="/pushin-motion.js?v=4" defer></script><link rel="stylesheet" href="/pushin-terminal.css"/><link rel="stylesheet" href="/pushin-mainnet.css"/><link rel="stylesheet" href="/pushin-content.css"/>'+wallet+'<link rel="stylesheet" href="/pushin-responsive.css?v=1"/><script src="/pushin-responsive.js?v=1" defer></script><script src="/pushin-terminal.js" defer></script><script src="/pushin-content.js" defer></script></head>');
     html=html.replace(/PrismPerp|PRISMPERP/g,'PUSHIN');
     writeFileSync(file,html);
   }
