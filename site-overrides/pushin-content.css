@@ -154,3 +154,62 @@ footer li>a+a{display:block;margin-top:8px}
  .pusheen-home .pushin-flow-section{gap:24px}
 }
 @media(prefers-reduced-motion:reduce){.pushin-flow-link{transition:none}}
+
+/* Compact groups: content determines height; related elements stay together. */
+.pusheen-home .pusheen-room-section{padding-top:24px!important;padding-bottom:26px!important}
+.pusheen-home .pusheen-room-section[data-room-scene]::before,
+.pusheen-home .pusheen-room-section--runner::before{top:10px;bottom:10px;border-radius:28px}
+.pusheen-home .pusheen-story-copy{padding:20px!important}
+.pusheen-home .pusheen-room-section>.reveal:first-child>div,
+.pusheen-home .pusheen-room-section>div.mx-auto:first-child{padding:0 12px 16px;max-width:920px}
+.pusheen-home .pusheen-room-section h2{margin-bottom:0}
+.pusheen-home .pusheen-room-section h2+p{margin-top:8px;line-height:1.55}
+.pusheen-home .pushin-venue-grid{gap:10px;margin:16px 0!important}
+.pusheen-home .pushin-venue-grid li{padding:10px 8px;gap:6px}
+.pusheen-home .pushin-risk-grid,.pusheen-home .pushin-market-grid{gap:12px}
+.pusheen-home .pushin-risk-card,.pusheen-home .pushin-market-card{padding:16px;border-radius:15px}
+.pusheen-home .pushin-risk-card p,.pusheen-home .pushin-market-card p{margin:8px 0;line-height:1.55}
+.pusheen-home .pushin-risk-visual{margin-top:8px;padding-top:0;gap:6px}
+.pusheen-home .pushin-risk-visual svg{height:58px}
+.pusheen-home .pushin-market-number{margin-top:8px;line-height:1.15}
+.pusheen-home .pushin-market-card>[data-market-change]{margin:4px 0 10px}
+.pusheen-home .pushin-table-scroll th,.pusheen-home .pushin-table-scroll td{padding:8px 6px}
+.pusheen-home .pushin-leverage-switch{margin:10px 0 16px;gap:8px}
+.pusheen-home .pushin-leverage-switch button{padding:8px 16px}
+.pusheen-home .pushin-term-cta{margin:12px 0;padding:9px 16px}
+.pusheen-home .pushin-terms ul{margin-top:8px;line-height:1.6}
+.pusheen-home .pushin-terms li{padding:3px 0}
+.pusheen-home .pushin-terms-note{margin-top:12px}
+.pusheen-home .pushin-flow-section{gap:18px}
+.pusheen-home .pushin-flow-section>.pushin-flow-heading{padding:0;max-width:900px}
+.pusheen-home .pushin-flow-heading p{margin-top:8px;max-width:85ch;line-height:1.55}
+.pusheen-home .pushin-flow-section>.pushin-flow-layout{grid-template-columns:minmax(0,1fr) 128px minmax(0,1fr);gap:24px}
+.pushin-flow-column{gap:10px}
+.pushin-flow-link{min-height:68px;padding:12px 16px;gap:12px;border-radius:16px}
+.pushin-flow-icon{width:40px;height:40px;border-radius:12px}
+.pushin-flow-hub{gap:6px}.pushin-flow-hub img{width:68px;height:68px}
+.pusheen-home .pushin-flow-section>.pushin-flow-cta{padding:10px 22px;align-self:center}
+.pusheen-home .pusheen-room-section--runner{padding-bottom:26px!important}
+.pusheen-home .pusheen-room-section--runner>ul{padding-top:16px;gap:12px 20px}
+.pusheen-home .pushin-no-cats{padding-block:24px!important}
+.pushin-content-wrap{padding:24px;margin-top:18px;margin-bottom:28px}
+.pushin-content-wrap section{margin-top:20px;padding-top:16px}
+.pushin-roadmap-grid{gap:12px}.pushin-roadmap-grid article{padding:18px}
+@media(max-width:1300px){
+ .pusheen-home .pushin-side-art{padding-bottom:128px!important}
+ .pusheen-home .pushin-side-art>.pushin-side-cat{width:110px!important;bottom:2px}
+ .pusheen-home .pushin-side-art[data-room-scene]::before{bottom:122px}
+}
+@media(max-width:760px){
+ .pusheen-home .pushin-flow-section>.pushin-flow-layout{grid-template-columns:1fr;gap:16px}
+ .pushin-flow-hub{width:88px;gap:4px;font-size:10px}.pushin-flow-hub img{width:48px;height:48px}
+ .pusheen-home .pushin-flow-section{gap:16px}
+ .pusheen-home .pusheen-room-section{padding-top:20px!important;padding-bottom:22px!important}
+ .pusheen-home .pushin-side-art{padding-bottom:120px!important}
+ .pusheen-home .pushin-side-art>.pushin-side-cat{width:100px!important}
+ .pusheen-home .pushin-side-art[data-room-scene]::before{bottom:114px}
+ .pusheen-home .pusheen-story-copy{padding:16px!important}
+ .pusheen-home .pusheen-room-section>.reveal:first-child>div,
+ .pusheen-home .pusheen-room-section>div.mx-auto:first-child{padding:0 0 14px}
+ .pushin-content-wrap{padding:20px 16px}
+}
