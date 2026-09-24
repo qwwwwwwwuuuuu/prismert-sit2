@@ -26,8 +26,7 @@
     const item=items[index];if(!item)return;
     button.disabled=true;notify('Preparing your GIF…');
     try{
-      const response=await fetch(item.src,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error();
-      const blob=await response.blob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='pusheen-'+item.title.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.gif';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);notify('Your GIF is ready.');
+      const a=document.createElement('a');a.href='/api/meme-download?id='+index;a.download='pusheen.gif';document.body.append(a);a.click();a.remove();notify('Your download is starting.');
     }catch{notify('Download unavailable. Open the GIF on Tenor from its preview.');openPreview(index);}
     finally{button.disabled=false;}
   }
