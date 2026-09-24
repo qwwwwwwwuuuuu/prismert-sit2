@@ -25,20 +25,17 @@
  .pushin-flow-cta::after,header .pushin-header-actions>a::after{animation:none!important}
 }
 
-/* Own the full block state, including over legacy reveal/reset styles. */
+/* Reference reveal curve and timings; scoped to beat legacy reset styles. */
 @media(prefers-reduced-motion:no-preference){
  html body main [data-block-motion="ready"]{
   opacity:0!important;visibility:visible!important;
-  transform:translate3d(0,44px,0) scale(.97)!important;filter:blur(10px)!important;
-  transition:opacity 1s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),transform 1s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),filter 1s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),box-shadow .25s ease!important;
+  transform:translateY(28px)!important;filter:blur(14px)!important;
+  transition:opacity .9s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),transform .9s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),filter .9s cubic-bezier(.22,1,.36,1) var(--block-delay,0ms),translate .2s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1)!important;
  }
- html body main [data-block-motion="ready"].pushin-block-visible{opacity:1!important;transform:translate3d(0,0,0) scale(1)!important;filter:blur(0)!important}
- html body main :is(.pushin-risk-card,.pushin-market-card,.pushin-flow-link,.meme-card).pushin-block-visible{animation:pushin-block-float 6s ease-in-out infinite;animation-delay:var(--block-delay,0ms)}
+ html body main [data-block-motion="ready"].pushin-block-visible{opacity:1!important;transform:translateY(0)!important;filter:blur(0)!important}
  @media(hover:hover) and (pointer:fine){
- html body main :is(.pushin-risk-card,.pushin-market-card,.pushin-flow-link,.meme-card).pushin-block-visible:hover{transform:translate3d(0,-8px,0) scale(1.015)!important;box-shadow:0 16px 30px -18px #9e6d52;animation-play-state:paused}
+ html body main :is(.pushin-risk-card,.pushin-market-card,.pushin-flow-link,.meme-card,.pushin-roadmap-grid article).pushin-block-visible:hover{translate:0 -6px;box-shadow:inset 0 1px 1px #fffaf6b0,0 20px 48px -28px #b56e87;transform:translateY(0)!important}
  }
- html.pushin-motion-paused body main [data-block-motion]{animation-play-state:paused!important}
 }
-@keyframes pushin-block-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(prefers-reduced-motion:reduce){html body main [data-block-motion]{opacity:1!important;filter:none!important;transform:none!important;animation:none!important;transition:none!important}}
 @media print{html body main [data-block-motion]{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}}

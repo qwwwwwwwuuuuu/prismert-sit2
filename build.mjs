@@ -40,7 +40,7 @@ function patchHtml(dir) {
     html=html.replace(/<script[^>]+src="\/pushin-content\.js"[^>]*><\/script>/g,'');
     html=html.replace(/<link[^>]+href="\/pushin-content\.css"[^>]*>/g,'');
     const wallet=entry.name==='connect.html'?'<script src="/pushin-mainnet-wallet.js" defer></script><script src="/pushin-mainnet-app.js" defer></script>':'';
-    html=html.replace('</head>','<link rel="stylesheet" href="/pushin-motion.css?v=3"/><script src="/pushin-motion.js?v=3" defer></script><link rel="stylesheet" href="/pushin-terminal.css"/><link rel="stylesheet" href="/pushin-mainnet.css"/><link rel="stylesheet" href="/pushin-content.css"/>'+wallet+'<script src="/pushin-terminal.js" defer></script><script src="/pushin-content.js" defer></script></head>');
+    html=html.replace('</head>','<link rel="stylesheet" href="/pushin-motion.css?v=4"/><script src="/pushin-motion.js?v=4" defer></script><link rel="stylesheet" href="/pushin-terminal.css"/><link rel="stylesheet" href="/pushin-mainnet.css"/><link rel="stylesheet" href="/pushin-content.css"/>'+wallet+'<script src="/pushin-terminal.js" defer></script><script src="/pushin-content.js" defer></script></head>');
     html=html.replace(/PrismPerp|PRISMPERP/g,'PUSHIN');
     writeFileSync(file,html);
   }
