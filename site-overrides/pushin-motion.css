@@ -18,7 +18,7 @@
 @keyframes pushin-button-idle{0%,55%{translate:-130% 0}85%,100%{translate:130% 0}}
 @keyframes pushin-art-float{0%,100%{translate:0 0}50%{translate:0 -18px}}
 @keyframes pushin-hub-breathe{0%,100%{box-shadow:0 0 0 10px #fff6ef,0 0 0 11px #eed9cd}50%{box-shadow:0 0 0 14px #fff6ef,0 0 0 15px #efcbd8}}
-@keyframes pushin-button-sweep{from{translate:-130% 0;animation:pushin-button-idle 4.8s ease-in-out infinite}to{translate:130% 0}}
+@keyframes pushin-button-sweep{from{translate:-130% 0}to{translate:130% 0}}
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto!important}
  .pusheen-hero-banner,.pushin-side-cat,.pushin-flow-hub,.pushin-flow-link,.pushin-risk-card,.pushin-market-card,.pushin-roadmap-grid article,.pushin-venue-grid li,.meme-card{animation:none!important;transition:none!important;translate:none!important}
