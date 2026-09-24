@@ -51,7 +51,7 @@ function patchArtwork(dir) {
     if(entry.isDirectory()) {patchArtwork(file);continue;}
     if(!/\.(css|html)$/.test(entry.name))continue;
     const source=readFileSync(file,'utf8');
-    const result=source.replaceAll('/brand/pusheen-settlement-cutout.png','/brand/pusheen-settlement-clean-v2.webp').replaceAll('/brand/pusheen-docs-cutout.png','/brand/pusheen-docs-clean-v2.webp');
+    const result=source.replaceAll('/brand/pusheen-settlement-cutout.png','/brand/pusheen-settlement-clean-v2.webp').replaceAll('/brand/pusheen-docs-cutout.png','/brand/pusheen-docs-clean-v3.webp');
     if(source!==result)writeFileSync(file,result);
   }
 }

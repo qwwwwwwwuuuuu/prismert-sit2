@@ -3,7 +3,7 @@
   function start() {
     const body = document.body;
     if (body.classList.contains('pusheen-branded-page') && !body.classList.contains('pusheen-page--home') && !body.classList.contains('pusheen-workspace-page')) {
-      let scene = /pusheen-page--(docs|roadmap|tokenomics)/.test(body.className) ? 'docs-clean-v2.webp' : /pusheen-page--(connect|portfolio)/.test(body.className) ? 'settlement-clean-v2.webp' : 'analysis-cutout.png';
+      let scene = /pusheen-page--(docs|roadmap|tokenomics)/.test(body.className) ? 'docs-clean-v3.webp' : /pusheen-page--(connect|portfolio)/.test(body.className) ? 'settlement-clean-v2.webp' : 'analysis-cutout.png';
       const artwork = document.createElement('div');
       artwork.className = 'pushin-page-cats';
       artwork.setAttribute('aria-hidden','true');

@@ -78,7 +78,7 @@
       if (!scene) return;
       const room = section.closest('.pusheen-room-section');
       room.classList.add('pushin-side-art');
-      room.style.setProperty('--pushin-side-image', `url("/brand/${scene === "settlement" ? "pusheen-settlement-clean-v2.webp" : scene === "docs" ? "pusheen-docs-clean-v2.webp" : `pusheen-${scene}-cutout.png`}")`);
+      room.style.setProperty('--pushin-side-image', `url("/brand/${scene === "settlement" ? "pusheen-settlement-clean-v2.webp" : scene === "docs" ? "pusheen-docs-clean-v3.webp" : `pusheen-${scene}-cutout.png`}")`);
       ['left','right'].forEach(side => {
         const art = document.createElement('span');
         art.className = `pushin-side-cat pushin-side-cat--${side}`;
