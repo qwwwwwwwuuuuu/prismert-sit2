@@ -69,7 +69,7 @@
     root.querySelector('[data-address]').textContent=s.address||'Not connected';
     root.querySelector('[data-balance]').textContent=s.balance===null?'—':s.balance+' ETH';
     root.querySelector('[data-error]').textContent=s.error||'';
-    root.querySelector('[data-network]').textContent=!s.address?'Target: Robinhood Chain Mainnet · 4663':s.chainId==='0x1237'?'Connected to Robinhood Chain Mainnet · 4663':'Wrong network — switch to Robinhood Chain Mainnet';
+    root.querySelector('[data-network]').textContent=!s.address?'Target: Robinhood Chain Mainnet':s.chainId==='0x1237'?'Connected to Robinhood Chain Mainnet':'Wrong network — switch to Robinhood Chain Mainnet';
     root.querySelector('[data-switch]').hidden=!s.address||s.chainId==='0x1237';
     root.querySelector('[data-disconnect]').hidden=!s.address;
     root.querySelector('[data-connect]').textContent=s.busy?'Waiting for wallet…':s.address?'Change wallet':'Connect wallet';

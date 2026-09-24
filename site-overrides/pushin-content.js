@@ -1,6 +1,17 @@
 (function () {
   'use strict';
   function start() {
+    // Remove the decorative chain number from compact network badges only.
+    const cleanNetworkBadges = () => {
+      document.querySelectorAll('span, strong, small').forEach(node => {
+        if (node.children.length || !/^4663(?:0)?$/.test(node.textContent.trim())) return;
+        const parent = node.parentElement;
+        if (parent && parent.textContent.length < 100 && parent.textContent.includes('Robinhood Chain')) node.remove();
+      });
+    };
+    cleanNetworkBadges();
+    window.addEventListener('load', cleanNetworkBadges, {once:true});
+
     const api=window.PushinMarketPreview;
     const panel=document.getElementById('pushin-home-market');
     if(panel&&api&&!panel.hasAttribute("data-reference-market")){
