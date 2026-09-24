@@ -3,7 +3,7 @@
   function start() {
     const api=window.PushinMarketPreview;
     const panel=document.getElementById('pushin-home-market');
-    if(panel&&api){
+    if(panel&&api&&!panel.hasAttribute("data-reference-market")){
       let selected='c-vix-30d';
       panel.innerHTML='<div class="pushin-preview-tabs" role="tablist" aria-label="Market">'+api.markets.map(m=>'<button role="tab" data-preview-market="'+m.slug+'" aria-selected="'+(m.slug===selected)+'">'+m.short+'</button>').join('')+'</div><div class="pushin-preview-heading"><div><h3 id="pushin-preview-name"></h3><span>Generated practice data</span></div><strong id="pushin-preview-price"></strong><a id="pushin-preview-open" href="/trade.html">Open terminal ↗</a></div><div id="pushin-preview-chart" class="pa-chart"></div>';
       const render=()=>{const m=api.snapshot(selected);document.getElementById('pushin-preview-name').textContent=m.short;document.getElementById('pushin-preview-price').textContent=m.price.toFixed(2)+(selected==='c-vix-30d'?'':' bps');document.getElementById('pushin-preview-open').href='/trade.html?market='+selected;document.getElementById('pushin-preview-chart').innerHTML=api.chart(selected);};
