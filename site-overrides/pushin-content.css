@@ -129,3 +129,28 @@ footer li>a+a{display:block;margin-top:8px}
  .pushin-venue-grid li{padding:12px 8px}
  .pushin-page-cats{height:150px}.pushin-page-cats>.pushin-side-cat{width:140px}
 }
+
+/* Protocol flow: real navigation cards instead of decorative, inert nodes. */
+.pusheen-home .pushin-flow-section{gap:28px}
+.pusheen-home .pushin-flow-section>.pushin-flow-heading{max-width:820px;text-align:center;padding:8px 12px 0}
+.pushin-flow-heading p{margin:14px auto 0;max-width:72ch}
+.pusheen-home .pushin-flow-section>.pushin-flow-layout{display:grid;grid-template-columns:minmax(0,1fr) 168px minmax(0,1fr);gap:28px;align-items:center;position:relative}
+.pushin-flow-column{display:grid;gap:14px;min-width:0}
+.pushin-flow-link{display:flex;align-items:center;gap:16px;min-height:90px;padding:18px 20px;border:1px solid #e4c6b5;border-radius:20px;background:#fff5ed;color:#654634;font-size:15px;font-weight:600;box-shadow:0 4px 0 #efdace;transition:background .18s,transform .18s,box-shadow .18s}
+.pushin-flow-column:last-child .pushin-flow-link{background:#fbe9ef;border-color:#e9c1cf;box-shadow:0 4px 0 #f1d5df}
+.pushin-flow-icon{display:grid;place-items:center;width:48px;height:48px;flex-shrink:0;border:1px solid #e5c9b9;border-radius:15px;background:#fffcf8;color:#8a6046}
+.pushin-flow-icon svg{width:25px;height:25px}
+.pushin-flow-arrow{margin-left:auto;color:#b36b86;font-size:20px}
+.pushin-flow-hub{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;aspect-ratio:1;border:1px solid #e6c2cf;border-radius:50%;background:#f9dfe8;box-shadow:0 0 0 10px #fff6ef,0 0 0 11px #eed9cd;color:#654634;font-size:13px;font-weight:700;letter-spacing:.12em}
+.pushin-flow-hub img{border-radius:50%;object-fit:contain}
+.pusheen-home .pushin-flow-section>.pushin-flow-cta{width:auto!important;display:inline-flex;align-items:center;justify-content:center;gap:18px;padding:12px 24px;border:1px solid #e7a8bd;border-radius:30px;background:#f3b4ca;color:#654634;font-size:14px;font-weight:600}
+.pushin-flow-link:hover{background:#fbe7da;transform:translateY(-2px);box-shadow:0 6px 0 #eacdbc}
+.pushin-flow-column:last-child .pushin-flow-link:hover,.pushin-flow-hub:hover{background:#f6d0df}
+.pushin-flow-cta:hover{background:#eea3bd}
+@media(max-width:760px){
+ .pusheen-home .pushin-flow-section>.pushin-flow-layout{grid-template-columns:1fr;gap:24px;max-width:560px}
+ .pushin-flow-hub{width:112px;justify-self:center;gap:5px;font-size:11px}.pushin-flow-hub img{width:60px;height:60px}
+ .pushin-flow-link{min-height:76px;padding:14px 16px;font-size:14px}
+ .pusheen-home .pushin-flow-section{gap:24px}
+}
+@media(prefers-reduced-motion:reduce){.pushin-flow-link{transition:none}}
