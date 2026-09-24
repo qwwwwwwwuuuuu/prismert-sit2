@@ -1,55 +1,39 @@
-/* Small progressive motion layer: content stays visible if animation is unavailable. */
+/* Progressive, reference-style block reveals; no dependency on image loading. */
 (() => {
-  const preference = matchMedia('(prefers-reduced-motion: reduce)');
-  let entrance, visibility, additions;
-  const active = new Set();
-  function stop() {
-    entrance?.disconnect(); visibility?.disconnect(); additions?.disconnect();
-    active.forEach(animation => animation.cancel()); active.clear();
-    document.querySelectorAll('[data-pushin-floating]').forEach(el => el.removeAttribute('data-pushin-floating'));
-  }
-  function mount() {
-    stop();
-    if (preference.matches || !('IntersectionObserver' in window) || !Element.prototype.animate || document.querySelector('.pa-shell') || /\/(admin|trade|connect|portfolio|analytics|basis)\.html$/.test(location.pathname)) return;
-    const targets = [...document.querySelectorAll('main h1, main h2, .prism-hero p, .pushin-preview-heading, .pushin-risk-card, .pushin-market-card, .pushin-flow-link, .pushin-venue-grid li, .pushin-roadmap-grid article, .meme-card')];
-    entrance = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-          if (entry.boundingClientRect.bottom < 0 || entry.boundingClientRect.top > innerHeight) delete entry.target.dataset.pushinEntered;
-          return;
-        }
-        const el = entry.target;
-        if (el.dataset.pushinEntered || el.hidden) return;
-        el.dataset.pushinEntered = 'true';
-        const siblings = [...el.parentElement.children].filter(n => targets.includes(n));
-        const delay = Math.min(Math.max(0, siblings.indexOf(el)), 3) * 110;
-        const animation = el.animate([
-          {opacity: 0, translate: '0 36px', filter: 'blur(5px)'},
-          {opacity: 1, translate: '0 0', filter: 'blur(0)'}
-        ], {duration: 950, delay, easing: 'cubic-bezier(.22,1,.36,1)', fill: 'backwards'});
-        active.add(animation);
-        animation.finished.then(() => active.delete(animation), () => active.delete(animation));
-      });
-    }, {threshold: .08, rootMargin: '0px 0px -24px 0px'});
-    targets.forEach(el => entrance.observe(el));
-    visibility = new IntersectionObserver(entries => entries.forEach(entry => {
-      entry.target.setAttribute('data-pushin-floating', entry.isIntersecting ? 'active' : 'paused');
-    }), {rootMargin: '80px'});
-    const observed = new WeakSet();
-    const watchArtwork = () => document.querySelectorAll('.pushin-side-cat, .pushin-flow-hub, .pusheen-hero-banner').forEach(el => {
-      if (!observed.has(el)) { observed.add(el); visibility.observe(el); }
-    });
-    watchArtwork();
-    additions = new MutationObserver(watchArtwork);
-    additions.observe(document.body, {childList: true, subtree: true});
-  }
-  // Start without waiting for images; observe artwork added by the gallery later.
-  function ready() { requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(mount))); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready, {once: true}); else ready();
-  preference.addEventListener('change', ready);
-  document.addEventListener('visibilitychange', () => {
-    document.documentElement.classList.toggle('pushin-motion-paused', document.hidden);
-  });
-  window.addEventListener('pagehide', stop);
-  window.addEventListener('pageshow', event => { if (event.persisted) ready(); });
+ const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+ let observer, mutations;
+ const selector = 'main h1, main h2, .pushin-home-market, .pushin-risk-card, .pushin-market-card, .pushin-flow-link, .pushin-venue-grid li, .pushin-roadmap-grid article, .meme-card, .pusheen-story-copy, .pusheen-room-section--runner>ul, .pushin-content-wrap>section';
+ function mount() {
+  observer?.disconnect(); mutations?.disconnect();
+  document.querySelectorAll('[data-block-motion]').forEach(el => {el.removeAttribute('data-block-motion');el.classList.remove('pushin-block-visible');});
+  if (reduce.matches || !('IntersectionObserver' in window) || /\/(admin|trade|connect|portfolio|analytics|basis)\.html$/.test(location.pathname)) return;
+  const seen = new WeakSet();
+  observer = new IntersectionObserver(entries => entries.forEach(({target:el,isIntersecting,boundingClientRect:r}) => {
+   if (isIntersecting) {
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('pushin-block-visible')));
+   } else if (r.top >= innerHeight || r.bottom <= 0) {
+    el.classList.remove('pushin-block-visible');
+   }
+  }), {threshold:0,rootMargin:'0px 0px -70px 0px'});
+  const register = () => {
+   document.querySelectorAll(selector).forEach(el => {
+    if(seen.has(el) || el.parentElement.closest(selector)) return;
+    seen.add(el);
+    const siblings = [...el.parentElement.children].filter(n=>n.matches(selector));
+    el.style.setProperty('--block-delay', Math.min(Math.max(0,siblings.indexOf(el)),3)*120+'ms');
+    el.setAttribute('data-block-motion','ready');
+    observer.observe(el);
+   });
+   document.querySelectorAll('.pushin-side-cat,.pushin-flow-hub,.pusheen-hero-banner').forEach(el => el.setAttribute('data-pushin-floating','active'));
+  };
+  register();
+  mutations = new MutationObserver(register);
+  mutations.observe(document.querySelector('main') || document.body,{childList:true,subtree:true});
+  document.documentElement.dataset.pushinMotion='blocks-v3';
+ }
+ function ready(){requestAnimationFrame(mount)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+ reduce.addEventListener('change',ready);
+ window.addEventListener('pageshow',e=>{if(e.persisted)ready()});
+ document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('pushin-motion-paused',document.hidden));
 })();
