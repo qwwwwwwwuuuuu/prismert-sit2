@@ -59,5 +59,15 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin.html",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/admin",
+      "destination": "/api/admin"
+    }
   ]
 }

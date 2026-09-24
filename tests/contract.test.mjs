@@ -5,10 +5,10 @@ test('shared contract storage, authorization, validation and failure handling',a
   let stored=null;
   process.env.UPSTASH_REDIS_REST_URL='https://storage.example';
   process.env.UPSTASH_REDIS_REST_TOKEN='mock-token';
-  process.env.PUSHIN_ADMIN_SECRET='test-only-admin-secret';
+  process.env.PUSHIN_ADMIN_SECRET='test-only-admin-secret-long-enough';
   const original=global.fetch;
   global.fetch=async (_,options) => {const cmd=JSON.parse(options.body);if(cmd[0]==='SET')stored=cmd[2];return {ok:true,json:async()=>({result:cmd[0]==='GET'?stored:'OK'})};};
-  const call=async(method,body,authorized=true)=>{let code,payload;const res={setHeader(){},status(c){code=c;return this;},json(p){payload=p;return this;}};await handler({method,body,headers:{host:'site.example',origin:'https://site.example','content-type':'application/json',authorization:authorized?'Bearer test-only-admin-secret':'Bearer wrong'}},res);return {code,payload};};
+  const call=async(method,body,authorized=true)=>{let code,payload;const res={setHeader(){},status(c){code=c;return this;},json(p){payload=p;return this;},send(p){payload=p;return this;}};await handler({method,body,headers:{host:'site.example',origin:'https://site.example','content-type':'application/json',authorization:authorized?'Basic '+Buffer.from('admin:test-only-admin-secret-long-enough').toString('base64'):'Bearer wrong'}},res);return {code,payload};};
   try {
     assert.equal((await call('GET')).payload.contract,'');
     assert.equal((await call('POST',{contract:'test'},false)).code,401);

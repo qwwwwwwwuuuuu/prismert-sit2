@@ -1,6 +1,5 @@
-import { createHash, timingSafeEqual } from 'node:crypto';
+import { isAdmin, challenge } from '../lib/admin-auth.js';
 const KEY = 'pushin:contract:v1';
-function equal(a, b) { return timingSafeEqual(createHash('sha256').update(a).digest(), createHash('sha256').update(b).digest()); }
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('CDN-Cache-Control', 'no-store');
@@ -25,7 +24,7 @@ export default async function handler(req, res) {
     }
     const origin = req.headers.origin;
     if (origin && origin !== `https://${req.headers.host}`) return res.status(403).json({error:'Forbidden'});
-    if (!equal(String(req.headers.authorization || ''), `Bearer ${secret}`)) return res.status(401).json({error:'Неверный ключ администратора.'});
+    if (!isAdmin(req)) return challenge(res);
     if (!String(req.headers['content-type'] || '').startsWith('application/json')) return res.status(415).json({error:'Expected JSON'});
     let body;
     try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; } catch { return res.status(400).json({error:'Invalid JSON'}); }
