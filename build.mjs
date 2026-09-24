@@ -14,6 +14,14 @@ if (existsSync("site-overrides")) cpSync("site-overrides", "dist", {recursive:tr
 cpSync('dist/brand/pushin-favicon-v1.ico', 'dist/favicon.ico');
 cpSync('dist/brand/pushin-favicon-v1.png', 'dist/icon.png');
 cpSync('dist/brand/pushin-apple-icon-v1.png', 'dist/apple-icon.png');
+// Safari and cached metadata may still request the archived icon URLs.
+for (const name of readdirSync('dist')) {
+  if (/^favicon\.ico(?:@.*)?$/.test(name)) cpSync('dist/brand/pushin-favicon-v1.ico', join('dist', name));
+  if (/^icon\.png(?:@.*)?$/.test(name)) cpSync('dist/brand/pushin-favicon-v1.png', join('dist', name));
+  if (/^apple-icon\.png(?:@.*)?$/.test(name)) cpSync('dist/brand/pushin-apple-icon-v1.png', join('dist', name));
+}
+cpSync('dist/brand/pushin-apple-icon-v1.png', 'dist/apple-touch-icon.png');
+cpSync('dist/brand/pushin-apple-icon-v1.png', 'dist/apple-touch-icon-precomposed.png');
 function patchHtml(dir) {
   for (const entry of readdirSync(dir, {withFileTypes:true})) {
     const file=join(dir,entry.name);
@@ -22,7 +30,7 @@ function patchHtml(dir) {
     let html=readFileSync(file,'utf8');
     // Remove inherited Prism icons, including archive-style filenames and Safari icons.
     html=html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon|apple-touch-icon-precomposed|mask-icon)["'][^>]*>/gi,'');
-    html=html.replace('</head>','<link rel="icon" type="image/png" sizes="32x32" href="/brand/pushin-favicon-v1.png"><link rel="shortcut icon" href="/brand/pushin-favicon-v1.ico"><link rel="apple-touch-icon" sizes="180x180" href="/brand/pushin-apple-icon-v1.png"></head>');
+    html=html.replace('</head>','<link rel="icon" type="image/png" sizes="32x32" href="/brand/pushin-favicon-v1.png?v=2"><link rel="shortcut icon" href="/brand/pushin-favicon-v1.ico?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/brand/pushin-apple-icon-v1.png?v=2"></head>');
     html=html.replace(/<script src="\/prism-paper-feed-v2\.js"><\/script>/g,'');
     html=html.replace(/<script src="\/(?:pushin-paper-app-v1|pushin-mainnet-app|pushin-mainnet-wallet|pushin-simulator|pushin-terminal)\.js" defer(?:="defer")?><\/script>/g,'');
     html=html.replace(/<link rel="stylesheet" href="\/(?:pushin-paper-app-v1|pushin-mainnet|pushin-terminal)\.css"\s*\/?>/g,'');
