@@ -64,6 +64,30 @@
     if (fade) fade.hidden = true;
   };
 
+  const placeSideArtwork = (container) => {
+    const scenes = {
+      "Priced from public venue data": "data",
+      "Both markets, as they stand": "settlement"
+    };
+    container.querySelectorAll('h2').forEach(heading => {
+      const section = heading.closest('section');
+      if (heading.textContent.trim() === 'Open the terminal') {
+        section.classList.add('pushin-no-cats');
+      }
+      const scene = scenes[heading.textContent.trim()];
+      if (!scene) return;
+      const room = section.closest('.pusheen-room-section');
+      room.classList.add('pushin-side-art');
+      room.style.setProperty('--pushin-side-image', `url("/brand/pusheen-${scene}-cutout.png")`);
+      ['left','right'].forEach(side => {
+        const art = document.createElement('span');
+        art.className = `pushin-side-cat pushin-side-cat--${side}`;
+        art.setAttribute('aria-hidden','true');
+        room.append(art);
+      });
+    });
+  };
+
   const mount = () => {
     if (document.querySelector("[data-pusheen-story]")) return;
 
@@ -81,6 +105,7 @@
     hero.after(buildStorySection(sections[1]));
     decorateRoomSections(sections);
     mountMathsRunner(container);
+    placeSideArtwork(container);
   };
 
   window.addEventListener("load", () => {

@@ -49,3 +49,19 @@
 /* Documentation keeps its card layout without a running mascot lane. */
 .pusheen-home .pusheen-room-section--runner{padding-bottom:48px!important;min-height:0!important}
 .pushin-cat-track{display:none!important}
+
+/* Keep the terminal CTA clear; place the two market illustrations beside the cards. */
+.pusheen-home .pushin-no-cats,.pusheen-home .pushin-side-art{background-image:none!important}
+.pusheen-home .pushin-side-art>.pushin-side-cat{
+  position:absolute!important;bottom:24px;z-index:0;pointer-events:none;
+  width:max(0px,calc((100vw - 1100px)/2))!important;max-width:430px!important;
+  aspect-ratio:730/768;background-image:var(--pushin-side-image);
+  background-repeat:no-repeat;background-size:280.55% 100%;
+}
+.pusheen-home .pushin-side-cat--left{left:0;background-position:left bottom}
+.pusheen-home .pushin-side-cat--right{right:0;background-position:right bottom}
+@media(max-width:1300px){
+  .pusheen-home .pushin-side-art{padding-bottom:clamp(230px,35vw,350px)!important}
+  .pusheen-home .pushin-side-art>.pushin-side-cat{width:45vw!important;max-width:320px!important;bottom:0}
+  .pusheen-home .pushin-side-art[data-room-scene]::before{bottom:clamp(215px,33vw,330px)}
+}
