@@ -9,7 +9,9 @@ button,a,input,select,summary{touch-action:manipulation}
 .pushin-responsive-table{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
 .pushin-responsive-table:focus-visible{outline:2px solid #b36b86;outline-offset:2px}
 pre{max-width:100%;overflow:auto}
-header .pushin-header-row{align-items:center}
+header .pushin-header-row{display:flex!important;flex-wrap:wrap;height:auto;min-height:51px;padding-block:9px;gap:12px;align-items:center}
+header .pushin-header-actions{display:flex;align-items:center;gap:8px;margin-left:auto}
+.pusheen-home .pusheen-hero-banner{transform:none!important}
 header nav[aria-label="Primary"]{gap:clamp(12px,1.4vw,24px)}
 .pa-nav,.pushin-preview-tabs,.pushin-timeframes,.pm-market-tabs{max-width:100%;overscroll-behavior-x:contain}
 .pa-market-stats>*{min-width:0;overflow-wrap:anywhere}

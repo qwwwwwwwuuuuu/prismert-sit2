@@ -1,7 +1,8 @@
 (() => {
  function start(){
   document.querySelectorAll('header').forEach(header=>{
-   const row=header.querySelector('.pushin-header-row');
+   const row=header.querySelector('.pushin-header-row') || header.querySelector('nav[aria-label="Primary"]')?.parentElement;
+   if(row){row.classList.add('pushin-header-row');const action=row.querySelector('a[href="/trade.html"]')?.parentElement;if(action&&action!==row)action.classList.add('pushin-header-actions');}
    const menu=header.querySelector('.pushin-mobile-nav');
    if(row&&menu&&!row.contains(menu)) row.append(menu);
    if(menu){
