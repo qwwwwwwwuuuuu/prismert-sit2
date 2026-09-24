@@ -119,7 +119,7 @@
     var nav = [
       ["trade", "/trade.html", "Trade"], ["markets", "/markets.html", "Markets"], ["basis", "/basis.html", "Basis"],
       ["analytics", "/analytics.html", "Analytics"], ["portfolio", "/portfolio.html", "Portfolio"],
-      ["overview", "/overview.html", "Overview"], ["protocol", "/protocol.html", "Protocol"], ["docs", "/docs.html", "Docs"], ["tokenomics", "/tokenomics.html", "Tokenomics"], ["roadmap", "/roadmap.html", "Roadmap"]
+      ["overview", "/overview.html", "Overview"], ["protocol", "/protocol.html", "Protocol"], ["docs", "/docs.html", "Docs"], ["tokenomics", "/tokenomics.html", "Tokenomics"], ["roadmap", "/roadmap.html", "Roadmap"], ["memes", "/memes.html", "Memes"]
     ];
     return '<header class="pa-header">' +
       '<a class="pa-brand" href="/index.html"><img src="/brand/pusheen-mark.jpg" alt=""><span>Pushin</span></a>' +

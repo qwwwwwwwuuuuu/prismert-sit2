@@ -28,6 +28,9 @@ function patchHtml(dir) {
     if(entry.isDirectory()) {patchHtml(file);continue;}
     if(!entry.name.endsWith('.html'))continue;
     let html=readFileSync(file,'utf8');
+    // Keep the meme gallery discoverable in desktop, mobile and footer menus.
+    html=html.replace(/<a\b([^>]*href="\/roadmap\.html"[^>]*)>Roadmap<\/a>/g, (match,attrs) => match+'<a '+attrs.replace('/roadmap.html','/memes.html')+'>Memes</a>');
+
     // Remove inherited Prism icons, including archive-style filenames and Safari icons.
     html=html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon|apple-touch-icon-precomposed|mask-icon)["'][^>]*>/gi,'');
     html=html.replace('</head>','<link rel="icon" type="image/png" sizes="32x32" href="/brand/pushin-favicon-v1.png?v=2"><link rel="shortcut icon" href="/brand/pushin-favicon-v1.ico?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/brand/pushin-apple-icon-v1.png?v=2"></head>');
