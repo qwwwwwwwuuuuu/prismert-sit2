@@ -126,3 +126,12 @@ body .pushin-side-cat{display:block!important;opacity:1!important;visibility:vis
  .pusheen-home .pushin-side-art>.pushin-side-cat{width:100px!important;max-width:38vw!important}
  .pushin-page-cats>.pushin-side-cat{width:108px;max-width:38vw}
 }
+
+/* Reserved social profile sits immediately beside the contract address. */
+header .pushin-social-x{display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;padding:0;border:1px solid #dbc4b6;border-radius:50%;background:#fff0f5;color:#674a38;opacity:1;cursor:default}
+header .pushin-social-x svg{width:17px;height:17px}
+@media(max-width:600px){
+ header .pushin-header-actions:has(.pushin-social-x){display:grid;grid-template-columns:minmax(0,1fr) 44px auto;gap:6px}
+ header .pushin-header-actions:has(.pushin-social-x) #pushin-ca{max-width:none;width:100%}
+ header .pushin-social-x{width:44px;height:44px}
+}
