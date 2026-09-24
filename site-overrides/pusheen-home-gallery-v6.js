@@ -74,11 +74,11 @@
       if (heading.textContent.trim() === 'Open the terminal') {
         section.classList.add('pushin-no-cats');
       }
-      const scene = scenes[heading.textContent.trim()];
+      const scene = scenes[heading.textContent.trim()] || (section.classList.contains('pushin-no-cats') || section.classList.contains('pusheen-room-section--runner') ? null : section.dataset.roomScene);
       if (!scene) return;
       const room = section.closest('.pusheen-room-section');
       room.classList.add('pushin-side-art');
-      room.style.setProperty('--pushin-side-image', `url("/brand/pusheen-${scene}-cutout.png")`);
+      room.style.setProperty('--pushin-side-image', `url("/brand/${scene === "settlement" ? "pusheen-settlement-clean-v2.webp" : scene === "docs" ? "pusheen-docs-clean-v2.webp" : `pusheen-${scene}-cutout.png`}")`);
       ['left','right'].forEach(side => {
         const art = document.createElement('span');
         art.className = `pushin-side-cat pushin-side-cat--${side}`;

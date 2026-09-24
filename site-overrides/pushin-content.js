@@ -1,6 +1,18 @@
 (function () {
   'use strict';
   function start() {
+    const body = document.body;
+    if (body.classList.contains('pusheen-branded-page') && !body.classList.contains('pusheen-page--home') && !body.classList.contains('pusheen-workspace-page')) {
+      let scene = /pusheen-page--(docs|roadmap|tokenomics)/.test(body.className) ? 'docs-clean-v2.webp' : /pusheen-page--(connect|portfolio)/.test(body.className) ? 'settlement-clean-v2.webp' : 'analysis-cutout.png';
+      const artwork = document.createElement('div');
+      artwork.className = 'pushin-page-cats';
+      artwork.setAttribute('aria-hidden','true');
+      artwork.style.setProperty('--pushin-side-image', `url("/brand/pusheen-${scene}")`);
+      artwork.innerHTML = '<span class="pushin-side-cat pushin-side-cat--left"></span><span class="pushin-side-cat pushin-side-cat--right"></span>';
+      const main = document.querySelector('main');
+      if (main) main.insertAdjacentElement('afterend',artwork);
+    }
+
     // Remove the decorative chain number from compact network badges only.
     const cleanNetworkBadges = () => {
       document.querySelectorAll('span, strong, small').forEach(node => {

@@ -65,3 +65,16 @@
   .pusheen-home .pushin-side-art>.pushin-side-cat{width:45vw!important;max-width:320px!important;bottom:0}
   .pusheen-home .pushin-side-art[data-room-scene]::before{bottom:clamp(215px,33vw,330px)}
 }
+
+/* All recurring scene artwork uses protected side gutters, never the text area. */
+body.pusheen-branded-page:not(.pusheen-page--home)::before{content:none!important;display:none!important}
+.pusheen-page-art{display:none!important}
+.pushin-page-cats{position:absolute;left:0;top:130px;width:100%;height:640px;pointer-events:none;z-index:0}
+.pushin-page-cats>.pushin-side-cat{position:absolute;bottom:0;width:max(0px,calc((100vw - 1240px)/2));max-width:430px;aspect-ratio:730/768;background-image:var(--pushin-side-image);background-size:280.55% 100%;background-repeat:no-repeat}
+.pushin-side-cat--left{left:0;background-position:left bottom}
+.pushin-side-cat--right{right:0;background-position:right bottom}
+.pushin-overview-art-anchor::before{background-image:url('/brand/pusheen-settlement-clean-v2.webp')!important;background-size:contain!important}
+@media(max-width:1400px){
+ .pushin-page-cats{position:relative;top:auto;height:min(48vw,350px);margin:10px 0 25px}
+ .pushin-page-cats>.pushin-side-cat{width:45vw;max-width:320px}
+}

@@ -27,18 +27,7 @@ body.pushin-paper-app {
 }
 
 .pa-shell { min-height: 100vh; position: relative; isolation: isolate; }
-.pa-shell::before {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  right: -55px;
-  bottom: -50px;
-  width: min(390px, 34vw);
-  aspect-ratio: 1;
-  background: url('/brand/pusheen-room-data.png') center/contain no-repeat;
-  opacity: .12;
-  pointer-events: none;
-}
+.pa-shell::before { content:none!important; display:none!important; }
 
 .pa-header {
   position: sticky;
