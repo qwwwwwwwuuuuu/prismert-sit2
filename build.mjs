@@ -34,8 +34,8 @@ function patchHtml(dir) {
     // Archived detail pages contained a second site header inside main.
     let headerCount=0;
     html=html.replace(/<header\b[\s\S]*?<\/header>/gi, match => ++headerCount===1 ? match : '');
-    // Reserved X profile entry; enable once the project URL is supplied.
-    html=html.replace(/(<div\b[^>]*id="pushin-ca"[^>]*>[\s\S]*?<\/div>)/g, '$1<button class="pushin-social-x" type="button" disabled aria-label="X — link coming soon" title="X — link coming soon"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z"/></svg></button>');
+    // Official project X profile, beside the contract address.
+    html=html.replace(/(<div\b[^>]*id="pushin-ca"[^>]*>[\s\S]*?<\/div>)/g, '$1<a class="pushin-social-x" href="https://x.com/Pushin_rh" target="_blank" rel="noopener noreferrer" aria-label="PUSHIN on X (@Pushin_rh)" title="@Pushin_rh on X" style="cursor:pointer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.64 7.584H.47l8.6-9.835L0 1.154h7.594l5.243 6.932 6.064-6.933Zm-1.29 19.49h2.039L6.487 3.24H4.3l13.31 17.403Z"/></svg></a>');
     // Remove inherited Prism icons, including archive-style filenames and Safari icons.
     html=html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon|apple-touch-icon-precomposed|mask-icon)["'][^>]*>/gi,'');
     html=html.replace('</head>','<link rel="icon" type="image/png" sizes="32x32" href="/brand/pushin-favicon-v1.png?v=2"><link rel="shortcut icon" href="/brand/pushin-favicon-v1.ico?v=2"><link rel="apple-touch-icon" sizes="180x180" href="/brand/pushin-apple-icon-v1.png?v=2"></head>');
